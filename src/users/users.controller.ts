@@ -5,11 +5,12 @@ import { User } from './schemas/user.schema';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from 'src/users.service';
+import { ConfigService } from '@nestjs/config';
 
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService, private readonly configService: ConfigService) { }
 
   @Get(':userId')
   async getUser(@Param('userId') userId: string): Promise<User> {

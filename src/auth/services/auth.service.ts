@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { CreateUserDto, SignInDto } from './dtos/auth.dto';
-import { UsersRepository } from 'src/users/users.repository';
+import { SignUpDto, SignInDto } from '../dtos/auth.dto';
+import { UsersRepository } from 'src/users/repositories/users.repository';
 import * as bcrypt from 'bcrypt';
-import { JwtPayload } from './auth.interfaces';
+import { JwtPayload } from '../interfaces/auth.interfaces';
 import { JwtService } from '@nestjs/jwt';
 import { RESPONSE_MESSAGE } from 'src/configs/constants';
 @Injectable()
@@ -23,7 +23,7 @@ export class AuthService {
     }
   }
 
-  async signUp(createUserDto: CreateUserDto): Promise<void> {
+  async signUp(createUserDto: SignUpDto): Promise<void> {
     await this.usersRepository.create(createUserDto);
   }
 }

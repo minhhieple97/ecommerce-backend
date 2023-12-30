@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { v4 as uuidv4 } from 'uuid';
-import { UsersRepository } from "./users/users.repository";
-import { User } from "./users/schemas/user.schema";
-import { UpdateUserDto } from "./users/dtos/update-user.dto";
+import { UsersRepository } from "../repositories/users.repository";
+import { User } from "../schemas/user.schema";
+import { UpdateUserDto } from "../dtos/update-user.dto";
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) { }
 
   async getUserById(userId: string): Promise<User> {
-    return this.usersRepository.findOne({ userId })
+    return this.usersRepository.findOne({ userId });
   }
 
   async getUsers(): Promise<User[]> {

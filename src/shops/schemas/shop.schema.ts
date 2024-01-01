@@ -1,5 +1,6 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, SchemaTypes } from "mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, SchemaTypes } from 'mongoose';
+import { ROLES } from 'src/configs/constants';
 
 export type ShopDocument = Shop & Document;
 
@@ -7,7 +8,7 @@ export type ShopDocument = Shop & Document;
 export class Shop {
   @Prop({
     trim: true,
-    maxlength: 150
+    maxlength: 150,
   })
   name: string;
 
@@ -20,29 +21,29 @@ export class Shop {
 
   @Prop({
     type: String,
-    required: true
+    required: true,
   })
   password: string;
 
   @Prop({
     type: String,
     enum: ['active', 'inactive'],
-    default: 'inactive'
+    default: 'inactive',
   })
   status: string;
 
   @Prop({
     type: SchemaTypes.Boolean,
-    default: false
+    default: false,
   })
   verify: boolean;
 
   @Prop({
-    type: SchemaTypes.Array,
-    default: []
+    enum: Object.values(ROLES),
+    type: [SchemaTypes.String],
+    default: [ROLES.SHOP],
   })
   roles: string[];
-
 }
 
 export const ShopSchema = SchemaFactory.createForClass(Shop);
